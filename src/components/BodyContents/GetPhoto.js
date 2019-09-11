@@ -4,10 +4,10 @@ import PhotoCard from "./PhotoCard"
 
 function GetPhoto(props) {
     const [photo, setPhoto] = useState("apod")
-    const [date, setDate] = useState("apod")
+    const [date, setDate] = useState("2019-09-11")
     useEffect(() =>{
         axios
-        .get(`https://api.nasa.gov/planetary/${date}?api_key=9vz6H38mfle8aTcPO0SYIvCQ9oAh41FEZJqApzKE`)
+        .get(`https://api.nasa.gov/planetary/apod?api_key=9vz6H38mfle8aTcPO0SYIvCQ9oAh41FEZJqApzKE&date=${date}`)
         .then(res =>{
             const pod = res.data
             console.log(pod)
@@ -19,8 +19,11 @@ function GetPhoto(props) {
     }, [date])
     return (
         <div>
-            <h3>Choose a date to get the photo of the day.</h3>
-            <input type="date"></input>
+            <label htmlFor="date">Select a date to get a picture:</label><br />
+            <input type="date" min="2017-01-01" max="2019-09-11" id="date" onChange ={function(){
+              const selector = document.getElementById("date")
+              setDate(selector.value)
+            }}></input>
             <PhotoCard id={photo.date} imgUrl={photo.url} desc={photo.explanation} copyright={photo.copyright} title={photo.title} />
         </div>
     )
