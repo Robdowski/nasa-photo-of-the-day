@@ -19,6 +19,8 @@ function GetPhoto(props) {
     }, [date])
     return (
         <div>
+            <h3>Choose a date to get the photo of the day.</h3>
+            <input type="date"></input>
             <PhotoCard id={photo.date} imgUrl={photo.url} desc={photo.explanation} copyright={photo.copyright} title={photo.title} />
         </div>
     )
